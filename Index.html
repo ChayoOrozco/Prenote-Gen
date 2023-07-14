@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pre-note Generator </title>
+    <link rel="stylesheet" href="estilos.css">
+
+  <style>
+    .menu {
+      display: none;
+    }
+
+    .button-style {
+      font-size: 20px; /* Ajusta el tamaño del texto */
+      padding: 15px 30px; /* Ajusta el padding para hacer el botón más grande */
+      display: block; /* Hace que el botón sea un bloque, lo que permite centrarlo */
+      margin: 0 auto; /* Centra el botón en el contenedor */
+    }
+
+    .doctors-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .doctor-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+    }
+
+    .doctor-button {
+      width: 200px;
+      height: 200px;
+      background-color: #f2f2f2;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .doctor-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .sub-options {
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    .form-container {
+      display: none;
+      text-align: left;
+    }
+
+    .generated-textarea {
+      width: 400px;
+      height: 200px;
+      resize: none;
+      text-align: left;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="doctors-container">
+    <div class="doctor-card">
+      <button class="doctor-button" onclick="mostrarSubMenu('subMenu1')">
+        <img src="DR.Amy.png" alt="Dr. Amy Wecker">
+      </button>
+      <span class="doctor-name">Dr. Amy Wecker</span>
+      <div id="subMenu1" class="menu">
+        <div class="sub-options">
+          <button onclick="irAFormulario('AWfemaleInicialForm')">Inicial</button>
+          <button onclick="irAFormulario('AWfemaleFollowUpForm')">Follow up</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <button class="doctor-button" onclick="mostrarSubMenu('subMenu2')">
+        <img src="NPMassiel.png" alt="NP Massiel Alfonso-Folden">
+      </button>
+      <span class="doctor-name">NP Massiel Alfonso-Folden </span>
+      <div id="subMenu2" class="menu">
+        <div class="sub-options">
+          <button onclick="irAFormulario('NPfemaleInicialForm')">Inicial </button>
+          <button onclick="irAFormulario('NPfemaleFollowUpForm')">Follow up</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <button class="doctor-button" onclick="mostrarSubMenu('subMenu3')">
+        <img src="DR.rudy.png" alt="Dr. Rudolph Eberwein">
+      </button>
+      <span class="doctor-name">Dr. Rudolph Eberwein</span>
+      <div id="subMenu3" class="menu">
+        <div class="sub-options">
+          <button onclick="irAFormulario('REmaleInicialForm')">Inicial </button>
+          <button onclick="irAFormulario('REmaleFollowUpForm')">Follow up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-container" id="AWfemaleInicialForm">
+    <h2>Female Inicial</h2>
+    <form id="AWfemaleInicialForm">
+      <label for="fechaConsultaawfi">Consult date(MM/DD/AA):</label><br>
+      <input type="text" id="fechaConsultaawfi" name="fechaConsultaawfi"><br><br>
+      <label for="fechaColectaawfi">BW Date of collection (MM/DD/AA):</label><br>
+      <input type="text" id="fechaColectaawfi" name="fechaColectaawfi"><br><br>
+      <label for="ageawfi">AGE:</label>
+      <input type="text" id="ageawfi" name="ageawfi"><br><br>
+      <label for="b12awfi">B12:</label>
+      <input type="text" id="b12awfi" name="b12awfi"><br><br>
+      <label for="tshawfi">TSH:</label>
+      <input type="text" id="tshawfi" name="tshawfi"><br><br>
+      <label for="t3awfi">T3:</label>
+      <input type="text" id="t3awfi" name="t3awfi"><br><br>
+      <label for="stressawfi">Stress:</label>
+      <input type="text" id="stressawfi" name="stressawfi"><br><br>
+      <label for="dawfi">D:</label>
+      <input type="text" id="dawfi" name="dawfi"><br><br>
+      <label for="ldlawfi">LDL:</label>
+      <input type="text" id="ldlawfi" name="ldlawfi"><br><br>
+      <label for="cholesterolawfi">Cholesterol:</label>
+      <input type="text" id="cholesterolawfi" name="cholesterolawfi"><br><br>
+      <label for="shbgawfi">SHBG:</label>
+      <input type="text" id="shbgawfi" name="shbgawfi"><br><br>
+      <label for="altawfi">ALT:</label>
+      <input type="text" id="altawfi" name="altawfi"><br><br>
+      <label for="a1cawfi">A1C:</label>
+      <input type="text" id="a1cawfi" name="a1cawfi"><br><br>
+      <label for="igfawfi">IGF:</label>
+      <input type="text" id="igfawfi" name="igfawfi"><br><br>
+    </form>
+    <textarea id="pre-note-1" class="pre-note-1" style="
+    position: absolute;
+    left: 400px;
+    top: 40%;
+    height: 600px;
+    width: 800px;"></textarea>
+    <button class="button-style" onclick="generarTexto('AWfemaleInicialForm')">Generar Texto</button>
+    </div>
+    
+
+  <div class="form-container" id="NPfemaleInicialForm">
+    <h2>Female Inicial</h2>
+    <form id="NPfemaleInicialForm">
+      <label for="fechaConsultanpfi">Consult date(MM/DD/AA):</label><br>
+      <input type="text" id="fechaConsultanpfi" name="fechaConsultanpfi"><br><br>
+      <label for="fechaColectanpfi">BW Date of collection (MM/DD/AA):</label><br>
+      <input type="text" id="fechaColectanpfi" name="fechaColectanpfi"><br><br>
+      <label for="agenpfi">AGE:</label>
+      <input type="text" id="agenpfi" name="agenpfi"><br><br>
+      <label for="b12npfi">B12:</label>
+      <input type="text" id="b12npfi" name="b12npfi"><br><br>
+      <label for="tshnpfi">TSH:</label>
+      <input type="text" id="tshnpfi" name="tshnpfi"><br><br>
+      <label for="t3npfi">T3:</label>
+      <input type="text" id="t3npfi" name="t3npfi"><br><br>
+      <label for="stressnpfi">Stress:</label>
+      <input type="text" id="stressnpfi" name="stressnpfi"><br><br>
+      <label for="dnpfi">D:</label>
+      <input type="text" id="dnpfi" name="dnpfi"><br><br>
+      <label for="ldlnpfi">LDL:</label>
+      <input type="text" id="ldlnpfi" name="ldlnpfi"><br><br>
+      <label for="cholesterolnpfi">Cholesterol:</label>
+      <input type="text" id="cholesterolnpfi" name="cholesterolnpfi"><br><br>
+      <label for="shbgnpfi">SHBG:</label>
+      <input type="text" id="shbgnpfi" name="shbgnpfi"><br><br>
+      <label for="altnpfi">ALT:</label>
+      <input type="text" id="altnpfi" name="altnpfi"><br><br>
+      <label for="a1cnpfi">A1C:</label>
+      <input type="text" id="a1cnpfi" name="a1cnpfi"><br><br>
+      <label for="igfnpfi">IGF:</label>
+      <input type="text" id="igfnpfi" name="igfnpfi"><br><br>
+    </form>
+    <textarea id="pre-note-2" class="pre-note-2" style="
+    position: absolute;
+    left: 400px;
+    top: 40%;
+    height: 600px;
+    width: 800px;"></textarea>
+    <button class="button-style" onclick="generarTexto('NPfemaleInicialForm')">Generar Texto</button>
+    </div>
+    
+
+  <div class="form-container" id="AWfemaleFollowUpForm">
+    <h2>Female Follow Up</h2>
+    <form id="AWfemaleFollowUpForm">
+      <label for="fechaConsultaawffu">Consult date (MM/DD/AA):</label><br>
+      <input type="text" id="fechaConsultaawffu" name="fechaConsultaawffu"><br><br>
+      <label for="fechaColectaawffu">BW Date of collection (MM/DD/AA):</label><br>
+      <input type="text" id="fechaColectaawffu" name="fechaColectaawffu"><br><br>
+      <label for="ageawffu">AGE:</label>
+      <input type="text" id="ageawffu" name="ageawffu"><br><br>
+      <label for="visitNumberawffu">VISIT NUMBER:</label>
+      <input type="text" id="visitNumberawffu" name="visitNumberawffu"><br><br>
+      <label for="monthsawffu">MONTHS:</label>
+      <input type="text" id="monthsawffu" name="monthsawffu"><br><br>
+      <label for="b12awffu">B12:</label>
+      <input type="text" id="b12awffu" name="b12awffu"><br><br>
+      <label for="dawffu">D:</label>
+      <input type="text" id="dawffu" name="dawffu"><br><br>
+      <label for="ldlawffu">LDL:</label>
+      <input type="text" id="ldlawffu" name="ldlawffu"><br><br>
+      <label for="a1cawffu">A1C:</label>
+      <input type="text" id="a1cawffu" name="a1cawffu"><br><br>
+      <label for="igfawffu">IGF:</label>
+      <input type="text" id="igfawffu" name="igfawffu"><br><br>
+      <label for="altawffu">ALT:</label>
+      <input type="text" id="altawffu" name="altawffu"><br><br>
+      <label for="cholesterolawffu">Cholesterol:</label>
+      <input type="text" id="cholesterolawffu" name="cholesterolawffu"><br><br>
+      <label for="shbgawffu">SHBG:</label>
+      <input type="text" id="shbgawffu" name="shbgawffu"><br><br>
+    </form>
+    <textarea id="pre-note-3" class="pre-note-3" style="
+    position: absolute;
+    left: 400px;
+    top: 40%;
+    height: 600px;
+    width: 800px;"></textarea>
+    <button class="button-style" onclick="generarTexto('AWfemaleFollowUpForm')">Generar Texto</button>
+    </div>
+    
+
+  <div class="form-container" id="NPfemaleFollowUpForm">
+    <h2>Female Follow Up</h2>
+    <form id="NPfemaleFollowUpForm">
+      <label for="fechaConsultanpffu">Consult date (MM/DD/AA):</label><br>
+      <input type="text" id="fechaConsultanpffu" name="fechaConsultanpffu"><br><br>
+      <label for="fechaColectanpffu">BW Date of collection (MM/DD/AA):</label><br>
+      <input type="text" id="fechaColectanpffu" name="fechaColectanpffu"><br><br>
+      <label for="agenpffu">AGE:</label>
+      <input type="text" id="agenpffu" name="agenpffu"><br><br>
+      <label for="visitNumbernpffu">VISIT NUMBER:</label>
+      <input type="text" id="visitNumbernpffu" name="visitNumbernpffu"><br><br>
+      <label for="monthsnpffu">MONTHS:</label>
+      <input type="text" id="monthsnpffu" name="monthsnpffu"><br><br>
+      <label for="b12npffu">B12:</label>
+      <input type="text" id="b12npffu" name="b12npffu"><br><br>
+      <label for="dnpffu">D:</label>
+      <input type="text" id="dnpffu" name="dnpffu"><br><br>
+      <label for="ldlnpffu">LDL:</label>
+      <input type="text" id="ldlnpffu" name="ldlnpffu"><br><br>
+      <label for="a1cnpffu">A1C:</label>
+      <input type="text" id="a1cnpffu" name="a1cnpffu"><br><br>
+      <label for="igfnpffu">IGF:</label>
+      <input type="text" id="igfnpffu" name="igfnpffu"><br><br>
+      <label for="altnpffu">ALT:</label>
+      <input type="text" id="altnpffu" name="altnpffu"><br><br>
+      <label for="cholesterolnpffu">Cholesterol:</label>
+      <input type="text" id="cholesterolnpffu" name="cholesterolnpffu"><br><br>
+      <label for="shbgnpffu">SHBG:</label>
+      <input type="text" id="shbgnpffu" name="shbgnpffu"><br><br>
+    </form>
+    <textarea id="pre-note-4" class="pre-note-4" style="
+    position: absolute;
+    left: 400px;
+    top: 40%;
+    height: 600px;
+    width: 800px;"></textarea>
+    <button class="button-style" onclick="generarTexto('NPfemaleFollowUpForm')">Generar Texto</button>
+    </div>
+    
+
+  <div class="form-container" id="REmaleInicialForm">
+    <h2>Male Inicial</h2>
+    <form id="REmaleInicialForm">
+      <label for="fechaConsultami">Consult date (MM/DD/AA):</label><br>
+      <input type="text" id="fechaConsultami" name="fechaConsultami"><br><br>
+      <label for="fechaColectami">BW Date of collection (MM/DD/AA):</label><br>
+      <input type="text" id="fechaColectami" name="fechaColectami"><br><br>
+      <label for="agemi">AGE:</label>
+      <input type="text" id="agemi" name="agemi" required><br><br>
+      <label for="tmi">T:</label>
+      <input type="text" id="tmi" name="tmi" required><br><br>
+      <label for="fmi">F:</label>
+      <input type="text" id="fmi" name="fmi" required><br><br>
+      <label for="b12mi">B12:</label>
+      <input type="text" id="b12mi" name="b12mi" required><br><br>
+      <label for="exercisemi">EXERCISE:</label>
+      <input type="text" id="exercisemi" name="exercisemi" required><br><br>
+      <label for="tshmi">TSH:</label>
+      <input type="text" id="tshmi" name="tshmi" required><br><br>
+      <label for="stressmi">STRESS:</label>
+      <input type="text" id="stressmi" name="stressmi" required><br><br>
+      <label for="dmi">D:</label>
+      <input type="text" id="dmi" name="dmi" required><br><br>
+      <label for="ldlmi">LDL:</label>
+      <input type="text" id="ldlmi" name="ldlmi" required><br><br>
+      <label for="altmi">ALT:</label>
+      <input type="text" id="altmi" name="altmi" required><br><br>
+      <label for="igfmi">IGF:</label>
+      <input type="text" id="igfmi" name="igfmi" required><br><br>
+      <label for="a1cmi">A1C:</label>
+      <input type="text" id="a1cmi" name="a1cmi" required><br><br>
+    </form>
+    <textarea id="pre-note-5" class="pre-note-5" style="
+    position: absolute;
+    left: 400px;
+    top: 40%;
+    height: 600px;
+    width: 800px;"></textarea>
+    <button class="button-style" onclick="generarTexto('REmaleInicialForm')">Generar Texto</button>
+    </div>
+    
+
+  <div class="form-container" id="REmaleFollowUpForm">
+    <h2>Male Follow Up</h2>
+    <form id="REmaleFollowUpForm">
+      <label for="fechaConsultamfu">Consult date (MM/DD/AA):</label><br>
+      <input type="text" id="fechaConsultamfu" name="fechaConsultamfu"><br><br>
+      <label for="fechaColectamfu">BW Date of collection (MM/DD/AA):</label><br>
+      <input type="text" id="fechaColectamfu" name="fechaColectamfu"><br><br>
+      <label for="hctmfu">HCT:</label>
+      <input type="text" id="hctmfu" name="hctmfu" required><br><br>
+      <label for="tmfu">T:</label>
+      <input type="text" id="tmfu" name="tmfu" required><br><br>
+      <label for="freemfu">Free:</label>
+      <input type="text" id="freemfu" name="freemfu" required><br><br>
+      <label for="b12mfu">B12:</label>
+      <input type="text" id="b12mfu" name="b12mfu" required><br><br>
+      <label for="dmfu">D:</label>
+      <input type="text" id="dmfu" name="dmfu" required><br><br>
+      <label for="ldlmfu">LDL:</label>
+      <input type="text" id="ldlmfu" name="ldlmfu" required><br><br>
+      <label for="igfmfu">IGF:</label>
+      <input type="text" id="igfmfu" name="igfmfu" required><br><br>
+      <label for="a1cmfu">A1C:</label>
+      <input type="text" id="a1cmfu" name="a1cmfu" required><br><br>
+      <label for="pregmfu">PREG:</label>
+      <input type="text" id="pregmfu" name="pregmfu" required><br><br>
+      <label for="dheamfu">DHEA:</label>
+      <input type="text" id="dheamfu" name="dheamfu" required><br><br>
+      <label for="e2mfu">E2:</label>
+      <input type="text" id="e2mfu" name="e2mfu" required><br><br>
+      <label for="altmfu">ALT:</label>
+      <input type="text" id="altmfu" name="altmfu" required><br><br>
+    </form>
+    <textarea id="pre-note-6" class="pre-note-6" style="
+    position: absolute;
+    left: 400px;
+    top: 40%;
+    height: 600px;
+    width: 800px;"></textarea>
+    <button class="button-style" onclick="generarTexto('REmaleFollowUpForm')">Generar Texto</button>
+    </div>
+  
+  <button id="copyButton" onclick="copyToClipboard()" style="display: none;">Copy</button>
+
+  <script>
+    function mostrarSubMenu(menuId) {
+      var menus = document.getElementsByClassName("menu");
+      var subOptions = document.getElementsByClassName("sub-options");
+      for (var i = 0; i < menus.length; i++) {
+        if (menus[i].id === menuId) {
+          menus[i].style.display = "block";
+          subOptions[i].style.display = "block";
+        } else {
+          menus[i].style.display = "none";
+          subOptions[i].style.display = "none";
+        }
+      }
+    }
+
+    function irAFormulario(formId) {
+      var formContainer = document.getElementById(formId);
+      var formContainers = document.getElementsByClassName("form-container");
+      for (var i = 0; i < formContainers.length; i++) {
+        if (formContainers[i].id === formId) {
+          formContainers[i].style.display = "block";
+        } else {
+          formContainers[i].style.display = "none";
+        }
+      }
+      formContainer.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function generarTexto(AWfemaleInicialForm) {
+  var form = document.getElementById(AWfemaleInicialForm);
+  var preNoteId = "pre-note-1" + AWfemaleInicialForm.substr(AWfemaleInicialForm.length - 1);
+  var preNote = document.getElementById(pre-note-1);
+  const fechaConsultaawfi = form.querySelector("#fechaConsultaawfi").value;
+  const fechaColectaawfi = form.querySelector("#fechaColectaawfi").value;
+  const ageawfi = form.querySelector("#ageawfi").value;
+  const b12awfi = form.querySelector("#b12awfi").value;
+  const tshawfi = form.querySelector("#tshawfi").value;
+  const t3awfi = form.querySelector("#t3awfi").value;
+  const stressawfi = form.querySelector("#stressawfi").value;
+  const dawfi = form.querySelector("#dawfi").value;
+  const ldlawfi = form.querySelector("#ldlawfi").value;
+  const cholesterolawfi = form.querySelector("#cholesterolawfi").value;
+  const shbgawfi = form.querySelector("#shbgawfi").value;
+  const altawfi = form.querySelector("#altawfi").value;
+  const a1cawfi = form.querySelector("#a1cawfi").value;
+  const igfawfi = form.querySelector("#igfawfi").value;
+  
+  const machote1 = `?? ${fechaConsultaawfi} - By Dr. Wecker - BW ${fechaColectaawfi}
+This is a ${ageawfi} year old female who presents today for optimization. Our first step in this optimization journey is to focus on improving the pt's health by addressing fundamental deficiencies through our MHI Tier system. As we continue, we'll work closely with the pt to design a personalized & precise advanced therapy that's tailor-made to their specific goals & unique lifestyle. It's crucial that the patient understands the significance of NSF/quality-controlled supplements. In addition to the customized treatment plan, we recommend adopting a healthy lifestyle that includes intermittent fasting/paleo-like diet, avoiding gluten & A1 dairy. Incorporating these recommended lifestyle changes will greatly enhance the patient's overall well-being. The patient's current supplements, medications, labs, & recommendations were thoroughly discussed & reviewed. All necessary consents & waivers have been signed and documented in the patient's chart..As a starting point, we'll begin with the recommended treatment & review labs in 3 months.
+— TIME SENSITIVE
+— HORMONES
+Formula 1 # E3/E2/Progesterone (mg) # Take nights X or nightly at bedtime - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+Formula 2 # Pregnenolone/Dhea/Testosterone (mg) # Take every morning - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+— INJECTABLE VITAMIN NUTRIENTS
+Mic-B12 - 100 units 1x or 50 units 2x - B12 ${b12awfi}
+— OTHER OPTIMIZATION MEDICATIONS
+LDN - take at bed time 1.5mg # 14 days, then 3mg #14, & continue on 4.5mg
+Armour thyroid (1 cap) Xmg - TSH ${tshawfi}
+T3 Triiodothyronine mcg - T3 ${t3awfi}
+— TIER 1 & TIER 2 
+Calm 200-300mg {Magnesium/Gaba/L-theanine} 7x PM - Stress ${stressawfi}
+Magnesium citrate 300mg 7x PM 
+Vitamin D 5,000iu 7x - D ${dawfi}
+Essential Amino powder 5-10gm 7x 
+Thyroid support complex (2 caps) 7x
+Omega/CoQ10/Astaxanthin (2.4gm/134mg/5mg) 7x + Omega test & check levels at 12 wks - LDL ${ldlawfi}
+Super greens & mushrooms blend (green 5400mg/mush 1000mg) - Take 1 scoop 7x
+— OTHER TARGETED SUPPLEMENTS 
+Cholesterolpure (2 caps) 7x - Cholesterol ${cholesterolawfi}
+Dim detox (2 caps) 100mg 7x - SHBG ${shbgawfi}
+Athletic nutrients (3 caps) 7x
+Boswellia AKBA (1 cap) 7x
+Liver antioxidant support (4 caps) 7x - ALT ${altawfi}
+— TIER 3 | PEPTIDES 
+Tirzepatide/Semaglutide with a 5 day Prolon mimicking diet - A1C ${a1cawfi} 
+Cjc-Ipa (40/100mcg) QD-BID 5x - For best results, use a glucose monitor - IGF ${igfawfi} 
+BPC 300mcg BID 7x & TB5 750mcg 7x for 60 days
+GHK-CUp 2mg 7x for 4 wks
+Defenage cosmetic trio for skin regeneration 
+— DIET | LIFESTYLE MODIFICATIONS | OTHER RECOMMENDATIONS
+Workout videos - Start weight training 3-6x per wk, 20-59 min sessions
+Blue light blocking glasses for optimal sleep & eye health
+AquaTru estrogenic/EDC water filtration system 
+-------------------------------------------------------------------------
+Have the pt work with our functional gut restoration specialist or Total Gut Restoration Program
+Educational videos on EDC'S & Estrogenic's with testing 
+Grail | multi-cancer early detection test - over 50 types of cancers
+MHI spiritual documentary collection
+MHI health documentary collection
+MHI health & HRT book collection
+Guided meditations by Insight Timer `;
+
+  form.querySelector("pre-note-1").value = machote1;
+  var copyButton = document.getElementById("copyButton");
+  copyButton.style.display = "block";
+}
+
+
+function generarTexto(AWfemaleFollowUpForm) {
+  var form = document.getElementById(AWfemaleFollowUpForm);
+  var preNoteId = "pre-note-2" + AWfemaleFollowUpForm.substr(AWfemaleFollowUpForm.length - 1);
+  var preNote = document.getElementById(preNoteId);
+  const fechaConsultaawffu = document.getElementById("fechaConsultaawffu").value;
+  const fechaColectaawffu = document.getElementById("fechaColectaawffu").value;
+  const ageawffu = document.getElementById("ageawffu").value;
+  const visitNumberawffu = document.getElementById("visitNumberawffu").value;
+  const monthsawffu = document.getElementById("monthsawffu").value;
+  const b12awffu = document.getElementById("b12awffu").value;
+  const dawffu = document.getElementById("dawffu").value;
+  const ldlawffu = document.getElementById("ldlawffu").value;
+  const a1cawffu = document.getElementById("a1cawffu").value;
+  const igfawffu = document.getElementById("igfawffu").value;
+  const altawffu = document.getElementById("altawffu").value;
+  const cholesterolawffu = document.getElementById("cholesterolawffu").value;
+  const shbgawffu = document.getElementById("shbgawffu").value;
+  
+  const machote2 = `?? ${fechaColectaawffu} - By Dr. Wecker - BW ${fechaColectaawffu}
+This is a ${ageawffu} year old female who presents today for her ${visitNumberawffu} visit, ${monthsawffu} months after her last visit. Have her continue with the following treatment & review labs in 4-12 months.
+— TIME SENSITIVE
+— ADJUST
+— DISCONTINUE
+— MAINTAIN
+— ADD ON MEDS
+Formula 1 # E3/E2/Progesterone (mg) # Take nights X or nightly at bedtime - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+Formula 2 # Pregnenolone/Dhea/Testosterone (mg) # Take every morning - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+LDN - take at bed time 1.5mg # 14 days, then 3mg #14, & continue on 4.5mg
+Mic-B12 - 100 units 1x or 50 units 2x - B12 ${b12awffu}
+— TIER 1 & TIER 2
+Essential - Calm 200-300mg {Magnesium/Gaba/L-theanine} 7x PM 
+Essential - Magnesium citrate 300mg 7x PM 
+Essential - Vitamin D 5,000iu 7x - D ${dawffu}
+Essential - Essential Amino powder 5-10gm 7x 
+Vital - Nitric oxide 500mg + NO test strips & check levels wkly for 4-5 wks 
+Vital - NMN 500mg + Optional NAD test & check levels at 3 wks 
+Vital - Omega/CoQ10/Astaxanthin (2.4gm/134mg/5mg) 7x + Omega test & check levels at 12 wks - LDL ${ldlawffu}
+Vital - Super greens & mushrooms blend (green 5400mg/mush 1000mg) - Take 1 scoop 7x 
+— TIER 3 | PEPTIDES 
+Tirzepatide/Semaglutide with a 5 day Prolon mimicking diet - A1C ${a1cawffu}
+Cjc-Ipa (40/100mcg) QD-BID 5x - For best results, use a glucose monitor - IGF ${igfawffu}
+BPC 300mcg BID 7x & TB5 750mcg 7x for 60 days
+GHK-CUp 2mg 7x for 4 wks
+Defenage cosmetic trio for skin regeneration 
+— TIER 4 | GUT
+Digestive enzymes 7x
+Have the pt work with our functional gut restoration specialist or Total Gut Restoration Program
+— TIER 5 | LONGEVITY
+Reseveratrol / Quercetin/ Pyrroloquinoline Quinone/ Alpha Lipoic Acid
+Metformin + Rapamycin with a 12wk on/2wks off dosing schedule - A1C ${a1cawffu}
+— OTHER TARGETED SUPPLEMENTS 
+Vital - Liver antioxidant support (4 caps) 7x - ALT ${altawffu}
+Vital - Thyroid support complex (2 caps) 7x
+Vital - Cholesterolpure (2 caps) 7x - Cholesterol ${cholesterolawffu}
+Vital - Dim detox (2 caps) 100mg 7x - SHBG ${shbgawffu}
+Vital - Athletic nutrients (3 caps) 7x
+Vital - Boswellia AKBA (1 cap) 7x
+— DIET | LIFESTYLE MODIFICATIONS | OTHER RECOMMENDATIONS
+Workout videos - Start weight training 3-6x per wk, 20-59 min sessions 
+Blue light blocking glasses for optimal sleep & eye health 
+AquaTru estrogenic/EDC water filtration system
+-------------------------------------------------------------------------
+Educational videos on EDC'S & Estrogenic's with testing
+Grail | multi-cancer early detection test - over 50 types of cancers
+MHI spiritual documentary collection
+MHI health documentary collection
+MHI health & HRT book collection
+Guided meditations by Insight Timer`;
+
+  form.querySelector(".pre-note").value = machote2;
+
+}
+
+function generarTexto(NPfemaleInicialForm) {
+  var form = document.getElementById(NPfemaleInicialForm);
+  var preNoteId = "pre-note-3" + NPfemaleInicialForm.substr(NPfemaleInicialForm.length - 1);
+  var preNote = document.getElementById(preNoteId);
+  const fechaConsultanpfi = form.querySelector("#fechaConsultanpfi").value;
+  const fechaColectanpfi = form.querySelector("#fechaColectanpfi").value;
+  const agenpfi = form.querySelector("#agenpfi").value;
+  const b12npfi = form.querySelector("#b12npfi").value;
+  const tshnpfi = form.querySelector("#tshnpfi").value;
+  const t3npfi = form.querySelector("#t3npfi").value;
+  const stressnpfi = form.querySelector("#stressnpfi").value;
+  const dnpfi = form.querySelector("#dnpfi").value;
+  const ldlnpfi = form.querySelector("#ldlnpfi").value;
+  const cholesterolnpfi = form.querySelector("#cholesterolnpfi").value;
+  const shbgnpfi = form.querySelector("#shbgnpfi").value;
+  const altnpfi = form.querySelector("#altnpfi").value;
+  const a1cnpfi = form.querySelector("#a1cnpfi").value;
+  const igfnpfi = form.querySelector("#igfnpfi").value;
+  
+  const machote3 = `?? ${fechaConsultanpfi} - By Massiel Alfonso-Folden NP - BW ${fechaColectanpfi}
+This is a X year old female who presents today for optimization. Our first step in this optimization journey is to focus on improving the pt's health by addressing fundamental deficiencies through our MHI Tier system. As we continue, we'll work closely with the pt to design a personalized & precise advanced therapy that's tailor-made to their specific goals & unique lifestyle. It's crucial that the patient understands the significance of NSF/quality-controlled supplements. In addition to the customized treatment plan, we recommend adopting a healthy lifestyle that includes intermittent fasting/paleo-like diet, avoiding gluten & A1 dairy. Incorporating these recommended lifestyle changes will greatly enhance the patient's overall well-being. The patient's current supplements, medications, labs, & recommendations were thoroughly discussed & reviewed. All necessary consents & waivers have been signed and documented in the patient's chart. As a starting point, we'll begin with the recommended treatment & review labs in 3 months.
+— TIME SENSITIVE
+— HORMONES
+Formula 1 # E3/E2/Progesterone (mg) # Take nights X or nightly at bedtime - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+Formula 2 # Pregnenolone/Dhea/Testosterone (mg) # Take every morning - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+— INJECTABLE VITAMIN NUTRIENTS
+Mic-B12 - 100 units 1x or 50 units 2x - B12 ${b12npfi}
+— OTHER OPTIMIZATION MEDICATIONS
+LDN - take at bed time 1.5mg # 14 days, then 3mg #14, & continue on 4.5mg
+Armour thyroid (1 cap) Xmg - TSH ${tshnpfi}
+T3 Triiodothyronine mcg - T3 ${t3npfi}
+— TIER 1 & TIER 2 
+Calm 200-300mg {Magnesium/Gaba/L-theanine} 7x PM - Stress ${stressnpfi}
+Magnesium citrate 300mg 7x PM 
+Vitamin D 5,000iu 7x - D ${dnpfi}
+Essential Amino powder 5-10gm 7x 
+Thyroid support complex (2 caps) 7x
+Omega/CoQ10/Astaxanthin (2.4gm/134mg/5mg) 7x + Omega test & check levels at 12 wks - LDL ${ldlnpfi}
+Super greens & mushrooms blend (green 5400mg/mush 1000mg) - Take 1 scoop 7x
+— OTHER TARGETED SUPPLEMENTS 
+Cholesterolpure (2 caps) 7x - Cholesterol ${cholesterolnpfi}
+Dim detox (2 caps) 100mg 7x - SHBG ${shbgnpfi}
+Athletic nutrients (3 caps) 7x
+Boswellia AKBA (1 cap) 7x
+Liver antioxidant support (4 caps) 7x - ALT ${altnpfi}
+— TIER 3 | PEPTIDES 
+Tirzepatide/Semaglutide with a 5 day Prolon mimicking diet - A1C ${a1cnpfi}
+Cjc-Ipa (40/100mcg) QD-BID 5x- For best results, use a glucose monitor - IGF  ${igfnpfi}
+BPC 300mcg BID 7x & TB5 750mcg 7x for 60 days
+GHK-CUp 2mg 7x for 4 wks
+Defenage cosmetic trio for skin regeneration 
+— DIET | LIFESTYLE MODIFICATIONS | OTHER RECOMMENDATIONS
+Workout videos - Start weight training 3-6x per wk, 20-59 min sessions
+Blue light blocking glasses for optimal sleep & eye health
+AquaTru estrogenic/EDC water filtration system 
+-------------------------------------------------------------------------
+Have the pt work with our functional gut restoration specialist or Total Gut Restoration Program
+Educational videos on EDC'S & Estrogenic's with testing 
+Grail | multi-cancer early detection test - over 50 types of cancers
+MHI spiritual documentary collection
+MHI health documentary collection
+MHI health & HRT book collection
+Guided meditations by Insight Timer `;
+
+  form.querySelector(".pre-note").value = machote3;
+}
+
+function generarTexto(NPfemaleFollowUpForm) {
+  var form = document.getElementById(NPfemaleFollowUpForm);
+  var preNoteId = "pre-note-4" + fNPfemaleFollowUpForm.substr(NPfemaleFollowUpForm.length - 1);
+  var preNote = document.getElementById(preNoteId);
+  const fechaConsultanpffu = document.getElementById("fechaConsultanpffu").value;
+  const fechaColectanpffu = document.getElementById("fechaColectanpffu").value;
+  const agenpffu = document.getElementById("agenpffu").value;
+  const visitNumbernpffu = document.getElementById("visitNumbernpffu").value;
+  const monthsnpffu = document.getElementById("monthsnpffu").value;
+  const b12npffu = document.getElementById("b12npffu").value;
+  const dnpffu = document.getElementById("dnpffu").value;
+  const ldlnpffu = document.getElementById("ldlnpffu").value;
+  const a1cnpffu = document.getElementById("a1cnpffu").value;
+  const igfnpffu = document.getElementById("igfnpffu").value;
+  const altnpffu = document.getElementById("altnpffu").value;
+  const cholesterolnpffu = document.getElementById("cholesterolnpffu").value;
+  const shbgnpffu = document.getElementById("shbgnpffu").value;
+  
+  const machote4 = `?? ${fechaColectanpffu} - By Massiel Alfonso-Folden NP - BW ?? ${fechaColectanpffu}
+This is a ${agenpffu} old female who presents today for her ${visitNumbernpffu} visit, ${monthsnpffu} months after her last visit. Have her continue with the following treatment & review labs in 4-12 months.
+— TIME SENSITIVE
+— ADJUST
+— DISCONTINUE
+— MAINTAIN
+— ADD ON MEDS
+Formula 1 # E3/E2/Progesterone (mg) # Take nights X or nightly at bedtime - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+Formula 2 # Pregnenolone/Dhea/Testosterone (mg) # Take every morning - break tablet in half and take both pieces & hold under tongue for 3-5 minutes.
+LDN - take at bed time 1.5mg # 14 days, then 3mg #14, & continue on 4.5mg
+Mic-B12 - 100 units 1x or 50 units 2x - B12 ${b12npffu}
+— TIER 1 & TIER 2
+Essential - Calm 200-300mg {Magnesium/Gaba/L-theanine} 7x PM 
+Essential - Magnesium citrate 300mg 7x PM 
+Essential - Vitamin D 5,000iu 7x - D ${dnpffu}
+Essential - Essential Amino powder 5-10gm 7x 
+Vital - Nitric oxide 500mg + NO test strips & check levels wkly for 4-5 wks 
+Vital - NMN 500mg + Optional NAD test & check levels at 3 wks 
+Vital - Omega/CoQ10/Astaxanthin (2.4gm/134mg/5mg) 7x + Omega test & check levels at 12 wks - LDL ${ldlnpffu}
+Vital - Super greens & mushrooms blend (green 5400mg/mush 1000mg) - Take 1 scoop 7x 
+— TIER 3 | PEPTIDES 
+Tirzepatide/Semaglutide with a 5 day Prolon mimicking diet - A1C ${a1cnpffu}
+Cjc-Ipa (40/100mcg) QD-BID 5x - For best results, use a glucose monitor - IGF ${igfnpffu}
+BPC 300mcg BID 7x & TB5 750mcg 7x for 60 days
+GHK-CUp 2mg 7x for 4 wks
+Defenage cosmetic trio for skin regeneration 
+— TIER 4 | GUT
+Digestive enzymes 7x
+Have the pt work with our functional gut restoration specialist or Total Gut Restoration Program
+— TIER 5 | LONGEVITY
+Reseveratrol / Quercetin/ Pyrroloquinoline Quinone/ Alpha Lipoic Acid
+Metformin + Rapamycin with a 12wk on/2wks off dosing schedule - A1C ${a1cnpffu}
+— OTHER TARGETED SUPPLEMENTS 
+Vital - Liver antioxidant support (4 caps) 7x - ALT ${altnpffu}
+Vital - Thyroid support complex (2 caps) 7x
+Vital - Cholesterolpure (2 caps) 7x - Cholesterol ${cholesterolnpffu}
+Vital - Dim detox (2 caps) 100mg 7x - SHBG ${shbgnpffu}
+Vital - Athletic nutrients (3 caps) 7x
+Vital - Boswellia AKBA (1 cap) 7x
+— DIET | LIFESTYLE MODIFICATIONS | OTHER RECOMMENDATIONS
+Workout videos - Start weight training 3-6x per wk, 20-59 min sessions 
+Blue light blocking glasses for optimal sleep & eye health 
+AquaTru estrogenic/EDC water filtration system
+-------------------------------------------------------------------------
+Educational videos on EDC'S & Estrogenic's with testing
+Grail | multi-cancer early detection test - over 50 types of cancers
+MHI spiritual documentary collection
+MHI health documentary collection
+MHI health & HRT book collection
+Guided meditations by Insight Timer`;
+
+  form.querySelector(".pre-note").value = machote4;
+}
+ 
+
+function generarTexto(REmaleInicialForm) {
+  var form = document.getElementById(REmaleInicialForm);
+  var preNoteId = "pre-note-5" + REmaleInicialForm.substr(REmaleInicialForm.length - 1);
+  var preNote = document.getElementById(preNoteId);
+  const fechaConsultami = document.getElementById('fechaConsultami').value;
+      const fechaColectami = document.getElementById('fechaColectami').value;    
+      const agemi = document.getElementById('agemi').value;
+      const tmi = document.getElementById('tmi').value;
+      const fmi = document.getElementById('fmi').value;
+      const b12mi = document.getElementById('b12mi').value;
+      const exercisemi = document.getElementById('exercisemi').value;
+      const tshmi = document.getElementById('tshmi').value;
+      const stressmi = document.getElementById('stressmi').value;
+      const dmi = document.getElementById('dmi').value;
+      const ldlmi = document.getElementById('ldlmi').value;
+      const altmi = document.getElementById('altmi').value;
+      const igfmi = document.getElementById('igfmi').value;
+      const a1cmi = document.getElementById('a1cmi').value;
+  
+  const machote5 = `?? ${fechaConsultami} - By Dr. Eberwein - BW ${fechaColectami}
+The pt is ${agemi} years young. After a thorough analysis, the pt's lab results & symptomatology are consistent with hypogonadism. Labs also show evidence of X. After discussing risks & benefits of treatment, we have agreed to begin his optimization process with Tier X of 7. It's crucial that the patient understands the significance of NSF/quality-controlled supplements. In addition to the customized treatment plan, we recommend adopting a healthy lifestyle that includes intermittent fasting/paleo-like diet, avoiding gluten & A1 dairy. The patient's current supplements, medications, labs, & recommendations were thoroughly discussed & reviewed. All necessary consents & waivers have been signed and documented in the patient's chart. As a starting point, we'll begin with the recommended treatment & review labs in 6-8 wks.
+— TIME SENSITIVE
+The pt is showing an iron overload, repeat iron studies including genetic DNA testing for familial hemochromatosis & recommended to go see a hematologist
+Pubmed Study on post finasteride syndrome
+https://pubmed.ncbi.nlm.nih.gov/32033719/#:~:text=Post%2Dfinasteride%20syndrome%20(PFS),alopecia)%20or%20benign%20prostatic%20hyperplasia.
+— HORMONES
+Testosterone 100mg 2x or 70mgs 3x (Tier 1) - T ${tmi} / Free ${fmi}
+— INJECTABLE VITAMIN NUTRIENTS
+Mic-B12 - 100 units 1x or 50 units 2x - B12 ${b12mi}
+Amino 1 or Gac 3x +/- creatine monohydrate 5 grams 7x - pt exercises ${exercisemi}x per week
+— OTHER OPTIMIZATION MEDICATIONS
+Armour Thyroid 60mg 7x - TSH ${tshmi}
+Tadalafil (1 cap) 10mg QOD 
+— TIER 1 | ESSENTIALS
+Essential - Calm 200-300mg {Magnesium/Gaba/L-theanine} 7x PM - Stress ${stressmi}
+Essential - Vitamin D 10,000iu 7x - D ${dmi}
+Essential - Essential Amino powder (10gm) 7x 
+— TIER 2 | UPGRADES 
+Nitric oxide + NO test strips & check levels wkly for 4-5 wks 
+NMN + Optional NAD test & check levels at 3 wks
+Omega/CoQ10/Astaxanthin (2.4gm/134mg/5mg) 7x + Omega test & check levels at 12 wks - LDL ${ldlmi}
+Super greens & mushrooms blend (green 5400mg/mush 1000mg) - Take 1 scoop 7x
+— OTHER TARGETED SUPPLEMENTS 
+Liver antioxidant support (4 caps) 7x - ALT ${altmi}
+Hormone support (Magnesium 100mg/boron 6mg/Zinc 50mg/Dim 200mg) 7x - T ${tmi} / Free ${fmi}
+— TIER 3 | PEPTIDES 
+Start with Quinton marine plasma & molecular hydrogen loading dose 
+Approved peptide candidate -  For best GH results, use a glucose monitor - IGF ${igfmi}
+Tirzepatide/Semaglutide with a 5 day Prolon mimicking diet - A1C ${a1cmi}
+— DIET | LIFESTYLE MODIFICATIONS | OTHER RECOMMENDATIONS
+Phoenix at home shockwave optimization therapy
+AquaTru estrogenic/EDC water filtration system 
+Blue light blocking glasses for optimal sleep & eye health 
+Have the pt get at-home semen analysis & consider sperm-banking 
+Workout videos - Start weight training 3-6x per wk, 20-59 min sessions
+Biological epigenetic age test with Trudiagnostic 
+Have the pt work with our functional gut restoration specialist or Total Gut Restoration Program
+-------------------------------------------------------------------------
+Inform the pt on Ketamine IV therapy
+Educational videos on EDC'S & Estrogenic's with testing 
+Grail | multi-cancer early detection test - over 50 types of cancers
+MHI spiritual documentary collection
+MHI health documentary collection
+MHI health & HRT book collection
+Guided meditations by Insight Timer`;
+
+  form.querySelector(".pre-note").value = machote5;
+}
+
+function generarTexto(REmaleFollowUpForm) {
+  var form = document.getElementById(REmaleFollowUpForm);
+  var preNoteId = "pre-note-6" + REmaleFollowUpForm.substr(REmaleFollowUpForm.length - 1);
+  var preNote = document.getElementById(preNoteId);
+  const fechaConsultamfu = document.getElementById("fechaConsultamfu").value;
+      const fechaColectamfu = document.getElementById("fechaColectamfu").value;
+      const hctmfu = document.getElementById("hctmfu").value;
+      const tmfu = document.getElementById("tmfu").value;
+      const freemfu = document.getElementById("freemfu").value;
+      const b12mfu = document.getElementById("b12mfu").value;
+      const dmfu = document.getElementById("dmfu").value;
+      const ldlmfu = document.getElementById("ldlmfu").value;
+      const igfmfu = document.getElementById("igfmfu").value;
+      const a1cmfu = document.getElementById("a1cmfu").value;
+      const pregmfu = document.getElementById("pregmfu").value;
+      const dheamfu = document.getElementById("dheamfu").value;
+      const e2mfu = document.getElementById("e2mfu").value;
+      const altmfu = document.getElementById("altmfu").value;
+  
+  const machote6 = `?? ${fechaConsultamfu} - By Dr. Eberwein - BW ${fechaColectamfu}
+The pt has signs of hormone-induced secondary erythrocytosis (HCT @${hctmfu} ), have him donate blood 1-2 times per year. Have him continue with the following treatment & review labs in 6-12 months.
+— TIME SENSITIVE
+The pt has Iron overload, repeat iron studies including genetic DNA testing for hemochromatosis & recommend referral to a hematologist
+Pubmed Study on post finasteride syndrome
+https://pubmed.ncbi.nlm.nih.gov/32033719/#:~:text=Post%2Dfinasteride%20syndrome%20(PFS),alopecia)%20or%20benign%20prostatic%20hyperplasia.
+— ADJUST
+— MAINTAIN
+— ADD ON PHARMACY MEDS & SUPPLEMENTS
+Testosterone 100mg 2x or 70mgs 3x (Tier 1) - T ${tmfu} / Free ${freemfu}
+Mic-B12 - 100 units 1x or 50 units 2x - B12 ${b12mfu}
+Amino 1 or Gac 3x +/- creatine monohydrate 5 grams 7x  
+— TIER 1 | ESSENTIALS
+Essential - Calm 200-300mg {Magnesium/Gaba/L-theanine} 7x PM 
+Essential - Vitamin D 10,000iu 7x - D ${dmfu}
+Essential - Essential Amino powder (10gm) 7x 
+— TIER 2 | UPGRADES 
+Essential - Nitric oxide + NO test strips & check levels wkly for 4-5 wks 
+Vital - NMN + Optional NAD test & check levels at 3 wks
+Vital - Omega/CoQ10/Astaxanthin (2.4gm/134mg/5mg) 7x + Omega test & check levels at 12 wks - LDL ${ldlmfu}
+Vital - Super greens & mushrooms blend (green 5400mg/mush 1000mg) - Take 1 scoop 7x 
+Vital - Blue light blocking glasses for optimal sleep & eye health
+Vital - AquaTru estrogenic/EDC water filtration system 
+— TIER 3 | PEPTIDES 
+Start with Quinton marine plasma & molecular hydrogen loading dose 
+Approved peptide candidate -  For best GH results, use a glucose monitor - IGF ${igfmfu}
+Tirzepatide/Semaglutide with a 5 day Prolon mimicking diet - A1C ${a1cmfu}
+— TIER 4 | GUT
+Digestive enzymes 7x
+Have the pt work with our functional gut restoration specialist or Total Gut Restoration Program
+— TIER 5 | LONGEVITY
+Senolytic protocol - Reseveratrol / Quercetin/ CoQ10 / Pyrroloquinoline Quinone/ Alpha Lipoic Acid
+Metformin + Rapamycin with a 12wk on/2wks off dosing schedule - A1C ${a1cmfu} 
+Biological epigenetic age test with Trudiagnostic 
+— TIER 6 | ADVANCED PREVENTION
+Educational videos on EDC'S & Estrogenic's with testing 
+— OTHER TARGETED SUPPLEMENTS 
+Pregnenolone 90mg 7x - Pregnenolone - Be cautious with acne 
+Dhea 25mg 7x - Dhea - Be cautious with acne 
+Vital - Hormone support (magnesium 100mg/boron 6mg/Zinc 50mg/Dim 200mg) 7x - E2 ${e2mfu}
+Vital - Liver antioxidant support (4 caps) 7x - ALT ${altmfu}
+— DIET | LIFESTYLE MODIFICATIONS | OTHER RECOMMENDATIONS
+Phoenix at home shockwave optimization therapy
+Have the pt get at-home semen analysis & consider sperm-banking 
+Workout videos - Start weight training 3-6x per wk, 20-59 min sessions
+-------------------------------------------------------------------------
+Inform the pt on Ketamine IV therapy
+Educational videos on EDC'S & Estrogenic's with testing 
+Grail | multi-cancer early detection test - over 50 types of cancers
+MHI spiritual documentary collection
+MHI health documentary collection
+MHI health & HRT book collection
+Guided meditations by Insight Timer`;
+
+  form.querySelector(".pre-note-6").value = machote6;
+}
+
+function copyToClipboard() {
+  var textBox = document.querySelector(".pre-note");
+  
+  textBox.select();
+  
+  document.execCommand("copy");
+  
+  textBox.selectionEnd = textBox.selectionStart;
+  
+  alert("Texto copiado al portapapeles");
+}
+
+ </script>
+</body>
+</html>
